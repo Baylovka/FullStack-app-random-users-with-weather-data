@@ -8,7 +8,11 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     const configService = new ConfigService();
 
-    app.enableCors();
+    app.enableCors({
+        origin: 'https://full-stack-app-random-users-with-we.vercel.app',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        credentials: true,
+    });
     app.setGlobalPrefix('api');
     app.use('/static', express.static(join(__dirname, '..', 'static')));
 
